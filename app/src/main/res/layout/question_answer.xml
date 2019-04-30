@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView android:layout_width="match_parent"
+              android:layout_margin="10dp"
+              android:text="The correct answer is:"
+              android:textAlignment="center"
+              android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_margin="10dp"
+              android:id="@+id/correctAns"
+              android:text="A"
+              android:textAlignment="center"
+              android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_marginTop="20dp"
+              android:layout_margin="10dp"
+              android:text="Your answer was:"
+              android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+              android:textAlignment="center"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_margin="10dp"
+              android:id="@+id/yourAns"
+              android:text="A"
+              android:textAlignment="center"
+              android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="match_parent"
+              android:text="The number you have correct is"
+              android:layout_margin="10dp"
+              android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+              android:textAlignment="center"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_margin="10dp"
+              android:id="@+id/numCorrect"
+              android:text="2/4"
+              android:textAlignment="center"
+              android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+              android:layout_height="wrap_content"/>
+
+    <Button
+            android:text="Next"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextBtn"/>
+</LinearLayout>

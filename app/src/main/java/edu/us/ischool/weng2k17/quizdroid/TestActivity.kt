@@ -1,5 +1,6 @@
 package edu.us.ischool.weng2k17.quizdroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
@@ -18,8 +19,13 @@ class TestActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.single_question)
+
+        if (intent.getBooleanExtra("edu.us.ischool.weng2k17.quizdroid.fromAnswerActivity", false)) {
+            this.correct = intent.getIntExtra("edu.us.ischool.weng2k17.quizdroid.correct", 0)
+            this.currQuestionNum = intent.getIntExtra("edu.us.ischool.weng2k17.quizdroid.currQuestionNum", 0)
+        }
+
         val test = intent.getSerializableExtra("edu.us.ischool.weng2k17.quizdroid.test") as Test // ArrayList of Question objects
-        Log.i("TestActivity", test.toString())
         val questionText = findViewById<TextView>(R.id.questionText) // TextView in single_question.xml
         val currQuestion = test.questions[currQuestionNum] // current question to display
         questionText.text = currQuestion.qText
@@ -37,13 +43,30 @@ class TestActivity: AppCompatActivity() {
 
 
         val nextBtn = findViewById<Button>(R.id.nextQuestionBtn)
+        val btnGroup = findViewById<RadioGroup>(R.id.btnContainer)
+
+        btnGroup.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener {group, checkedId ->
+                if (checkedId > 0) {
+                    nextBtn.visibility = View.VISIBLE
+                }
+            }
+        )
+
         nextBtn.setOnClickListener {
-            nextBtn.visibility = View.VISIBLE
-            val btnGroup = findViewById<RadioGroup>(R.id.btnContainer)
+            currQuestionNum++
             val checkedId = btnGroup.checkedRadioButtonId
-            if (findViewById<RadioButton>(checkedId).text == currQuestion.answer) {
+            val yourAns = findViewById<RadioButton>(checkedId).text
+            if (yourAns == currQuestion.answer) {
                 correct++
             }
+
+            val intent = Intent(this, AnswerActivity::class.java)
+            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.correct", correct)
+            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.currQuestionNum", currQuestionNum)
+            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.test", test)
+            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.yourAns", yourAns)
+            this.startActivity(intent)
         }
     }
 }

@@ -20,7 +20,7 @@ class TopicOverviewActivity: AppCompatActivity() {
         val description = intent.getStringExtra("Description")
 
         val mathTest = ArrayList<Question>()
-        val q1 = Question("What is 1 + 1?", ArrayList<String>(), "6")
+        val q1 = Question("What is 1 + 1?", ArrayList<String>(), "2")
         q1.choices.add("2")
         q1.choices.add("4")
         q1.choices.add("5")
@@ -98,7 +98,7 @@ class TopicOverviewActivity: AppCompatActivity() {
         q3Marvel.choices.add("Chris Evans")
         q3Marvel.choices.add("Tom Holland")
 
-        val q4Marvel = Question("What actor plays Thor?", ArrayList<String>(), "Thor")
+        val q4Marvel = Question("What actor plays Thor?", ArrayList<String>(), "Chris Hemsworth")
         q4Marvel.choices.add("Brie Larson")
         q4Marvel.choices.add("Chris Hemsworth")
         q4Marvel.choices.add("Chris Evans")
@@ -119,13 +119,16 @@ class TopicOverviewActivity: AppCompatActivity() {
         testMap["Math"] = Test(mathTest)
         testMap["Physics"] = Test(physicsTest)
         testMap["Marvel Superheros"] = Test(marvelHerosTest)
-        Log.i("TopicOverviewActivity",testMap.toString())
+
+        val questionNumber = findViewById<TextView>(R.id.overviewQuestionNum)
+        val test = testMap[topicName] as Test
+        questionNumber.text = test.questions.size.toString()
 
         val beginBtn = findViewById<Button>(R.id.beginButton)
         beginBtn.setOnClickListener {
             val context = this
             val intent = Intent(context, TestActivity::class.java) // don't know how to get right context
-            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.test", testMap[topicName])
+            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.test", test)
             context.startActivity(intent)
         }
     }
