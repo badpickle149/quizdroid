@@ -34,7 +34,7 @@
 
         <activity android:name=".AnswerActivity"
                   android:label="Answer Page(s)"
-                  android:launchMode="singleTop">s
+                  android:launchMode="singleTop">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value=".TopicOverviewActivity"/>
         </activity>
