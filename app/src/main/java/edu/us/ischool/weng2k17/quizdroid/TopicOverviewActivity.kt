@@ -4,21 +4,57 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Debug
 import android.os.PersistableBundle
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import org.w3c.dom.Text
 
 class TopicOverviewActivity: AppCompatActivity() {
+
+    private  val TAG = "TopicOverviewActivity"
+    private val testMap = mutableMapOf<String, Test>()
+    private val correct = 0
+    private var currQuestionNum = 0
+    private var topicName = ""
+    private val isFinished = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.topic_overview)
 
-        val topicName = intent.getStringExtra("TopicName")
+        assignData()
+        topicName = intent.getStringExtra("TopicName")
         val description = intent.getStringExtra("Description")
 
+        val overviewContainer = findViewById<LinearLayout>(R.id.overviewContainer)
+
+        val overviewTitle = findViewById<TextView>(R.id.overviewTopicName)
+        overviewTitle.text = topicName
+
+        val overviewDesc = findViewById<TextView>(R.id.overviewDesc)
+        overviewDesc.text = description
+
+        val questionNumber = findViewById<TextView>(R.id.overviewQuestionNum)
+        val test = testMap[topicName] as Test
+        questionNumber.text = test.questions.size.toString()
+
+        val beginBtn = findViewById<Button>(R.id.beginButton)
+        beginBtn.setOnClickListener {
+            val fragment: SingleQuestionFragment = SingleQuestionFragment.newInstance(testMap[topicName]!!.questions[currQuestionNum])
+
+            // add fragment to View
+            val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.fragmentContainer, fragment)
+            ft.commit()
+
+            overviewContainer.visibility = View.GONE
+        }
+    }
+
+    private fun assignData() {
+        // tests and questions
         val mathTest = ArrayList<Question>()
         val q1 = Question("What is 1 + 1?", ArrayList<String>(), "2")
         q1.choices.add("2")
@@ -109,27 +145,9 @@ class TopicOverviewActivity: AppCompatActivity() {
         marvelHerosTest.add(q3Marvel)
         marvelHerosTest.add(q4Marvel)
 
-        val title = findViewById<TextView>(R.id.overviewTopicName)
-        title.text = topicName
-
-        val desc = findViewById<TextView>(R.id.overviewDesc)
-        desc.text = description
-
-        val testMap = mutableMapOf<String, Test>()
         testMap["Math"] = Test(mathTest)
         testMap["Physics"] = Test(physicsTest)
         testMap["Marvel Superheros"] = Test(marvelHerosTest)
-
-        val questionNumber = findViewById<TextView>(R.id.overviewQuestionNum)
-        val test = testMap[topicName] as Test
-        questionNumber.text = test.questions.size.toString()
-
-        val beginBtn = findViewById<Button>(R.id.beginButton)
-        beginBtn.setOnClickListener {
-            val context = this
-            val intent = Intent(context, TestActivity::class.java) // don't know how to get right context
-            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.test", test)
-            context.startActivity(intent)
-        }
+        // tests and questions end
     }
 }

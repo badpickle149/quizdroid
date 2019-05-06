@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         val topics = ArrayList<Topic>()
 
+        // topic descriptions
         topics.add(Topic("Math", "Math is a topic that some find fun but many find NOT fun. If you're on this page, you must be someone who thinks math is fun (weirdo)"))
         topics.add(Topic("Physics", "Like math, physics is a topic only the select few can savor. Being this quiz at your own risk"))
         topics.add(Topic("Marvel Superheros", "Try to name Marvel Superheros! Fun!"))
@@ -25,5 +26,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = CustomAdapter(topics)
 
         recyclerView.adapter = adapter
+
     }
+
 }

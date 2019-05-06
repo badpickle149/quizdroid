@@ -2,6 +2,7 @@ package edu.us.ischool.weng2k17.quizdroid
 
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.card_layout.view.*
 
 class CustomAdapter(val topicList: ArrayList<Topic>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+    private val TAG = "CustomAdapter"
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val v = LayoutInflater.from(p0.context).inflate(R.layout.card_layout, p0, false)
         return ViewHolder(v)
@@ -21,6 +24,8 @@ class CustomAdapter(val topicList: ArrayList<Topic>): RecyclerView.Adapter<Custo
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val topic: Topic = topicList[p1]
+        Log.i(TAG, topic.name)
+        Log.i(TAG, p1.toString())
         p0.cardTopic.text = topic.name
         p0.goToOverviewBtn.setOnClickListener {
             //cardTopic.setText("Clicked on this button")

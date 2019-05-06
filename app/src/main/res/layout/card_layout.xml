@@ -25,4 +25,5 @@
                     android:text="Go to Overview"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
 </LinearLayout>
