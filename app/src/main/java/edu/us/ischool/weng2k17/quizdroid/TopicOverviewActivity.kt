@@ -11,20 +11,21 @@ import android.view.View
 import android.widget.*
 import org.w3c.dom.Text
 
-class TopicOverviewActivity: AppCompatActivity() {
+class TopicOverviewActivity: AppCompatActivity(), SingleQuestionFragment.OnSubmitBtnListener, AnswerFragment.OnNextBtnListener{
 
-    private  val TAG = "TopicOverviewActivity"
     private val testMap = mutableMapOf<String, Test>()
-    private val correct = 0
+    private var correct = 0
     private var currQuestionNum = 0
     private var topicName = ""
-    private val isFinished = false
+    private val fragmentContainer = R.id.fragmentContainer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.topic_overview)
 
-        assignData()
+        assignData() // manually assign all data
+
+        // get topic name and description from MainActivity
         topicName = intent.getStringExtra("TopicName")
         val description = intent.getStringExtra("Description")
 
@@ -41,16 +42,43 @@ class TopicOverviewActivity: AppCompatActivity() {
         questionNumber.text = test.questions.size.toString()
 
         val beginBtn = findViewById<Button>(R.id.beginButton)
+
+        // When begin button is clicked it takes user to first question
         beginBtn.setOnClickListener {
             val fragment: SingleQuestionFragment = SingleQuestionFragment.newInstance(testMap[topicName]!!.questions[currQuestionNum])
 
             // add fragment to View
             val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.fragmentContainer, fragment)
+            ft.replace(fragmentContainer, fragment)
             ft.commit()
 
             overviewContainer.visibility = View.GONE
         }
+    }
+
+    // handles clicking the "submit" button on the Question page
+    // makes and displays an AnswerFragment
+    override fun onSubmitClick(userAnswer: String) {
+        currQuestionNum++
+        if (userAnswer == testMap[topicName]!!.questions[currQuestionNum - 1].answer) {
+            correct++
+        }
+
+        val fragment = AnswerFragment.newInstance(testMap[topicName] as Test, correct, userAnswer, currQuestionNum)
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        ft.replace(fragmentContainer, fragment)
+        ft.commit()
+    }
+
+    // handles clicking the "next" button on the Answer page
+    // makes and displays a SingleButtonFragment
+    override fun onNextBtnClick() {
+        val fragment: SingleQuestionFragment = SingleQuestionFragment.newInstance(testMap[topicName]!!.questions[currQuestionNum])
+
+        // add fragment to View
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        ft.replace(fragmentContainer, fragment)
+        ft.commit()
     }
 
     private fun assignData() {

@@ -10,20 +10,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class AnswerFragment : Fragment() {
     private val TEST_KEY = "test"
     private val USERS_ANSWER_KEY = "usersAnswer"
     private val CURR_QUESTION_NUM_KEY = "currQuestionNum"
     private val NUM_CORRECT_KEY = "numCorrect"
+
+    interface OnNextBtnListener {
+        fun onNextBtnClick()
+    }
 
     companion object {
 
@@ -75,7 +70,8 @@ class AnswerFragment : Fragment() {
         }
         nextBtn.setOnClickListener {
             if (questionNum != totalQuestionNum) {
-                
+                val btnListener = activity as OnNextBtnListener
+                btnListener.onNextBtnClick()
             } else {
                 val intent = Intent(activity, MainActivity::class.java)
                 this.startActivity(intent)

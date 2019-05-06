@@ -13,6 +13,10 @@ import android.widget.TextView
 
 class SingleQuestionFragment : Fragment() {
 
+    interface OnSubmitBtnListener {
+        fun onSubmitClick(userAnswer: String)
+    }
+
     private val QUESTION_KEY = "question"
     companion object {
         private val KEY = "question"
@@ -78,6 +82,13 @@ class SingleQuestionFragment : Fragment() {
             this.startActivity(intent)
         }
         */
+
+        nextBtn.setOnClickListener {
+            val checkedId = btnGroup.checkedRadioButtonId
+            val yourAns = rootView.findViewById<RadioButton>(checkedId).text
+            val btnListener = activity as OnSubmitBtnListener
+            btnListener.onSubmitClick(yourAns.toString())
+        }
 
         return rootView
     }
