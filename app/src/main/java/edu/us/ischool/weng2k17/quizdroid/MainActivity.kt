@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.widget.LinearLayout
 
 class MainActivity : AppCompatActivity() {
@@ -16,14 +17,16 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
-        val topics = ArrayList<Topic>()
+        val topics = QuizApp.accessTopicRepo()
+        val topicList = ArrayList<Topic>()
+        topicList.apply {
+            add(topics["Math"]!!)
+            add(topics["Physics"]!!)
+            add(topics["Marvel Superheros"]!!)
+        }
 
-        // topic descriptions
-        topics.add(Topic("Math", "Math is a topic that some find fun but many find NOT fun. If you're on this page, you must be someone who thinks math is fun (weirdo)"))
-        topics.add(Topic("Physics", "Like math, physics is a topic only the select few can savor. Being this quiz at your own risk"))
-        topics.add(Topic("Marvel Superheros", "Try to name Marvel Superheros! Fun!"))
 
-        val adapter = CustomAdapter(topics)
+        val adapter = CustomAdapter(topicList)
 
         recyclerView.adapter = adapter
 

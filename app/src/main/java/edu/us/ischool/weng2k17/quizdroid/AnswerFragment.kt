@@ -22,7 +22,7 @@ class AnswerFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(test: Test, numCorrect: Int, usersAnswer: String, currQuestionNum: Int): AnswerFragment {
+        fun newInstance(test: Topic, numCorrect: Int, usersAnswer: String, currQuestionNum: Int): AnswerFragment {
             val args = Bundle().apply {
                 putSerializable("test", test)
                 putInt("numCorrect", numCorrect)
@@ -43,9 +43,9 @@ class AnswerFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.question_answer, container, false)
         val test = arguments?.let {
-            it.getSerializable(TEST_KEY) as Test
+            it.getSerializable(TEST_KEY) as Topic
         }
-        val totalQuestionNum = test!!.questions.size
+        val totalQuestionNum = test!!.quizzes.size
         val numCorrect = arguments?.let {
             it.getInt(NUM_CORRECT_KEY)
         }
@@ -60,7 +60,8 @@ class AnswerFragment : Fragment() {
         val yourAnsTextView = rootView.findViewById<TextView>(R.id.yourAns)
         val numCorrectTextView = rootView.findViewById<TextView>(R.id.numCorrect)
 
-        correctAnsTextView.text = test.questions[questionNum!! - 1].answer
+        val question = test.quizzes[questionNum!! - 1]
+        correctAnsTextView.text = question.choices[question.correct - 1]
         yourAnsTextView.text = usersAns
         numCorrectTextView.text = numCorrect.toString() + "/" + totalQuestionNum
 

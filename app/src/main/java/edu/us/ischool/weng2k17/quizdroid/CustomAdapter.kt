@@ -24,14 +24,14 @@ class CustomAdapter(val topicList: ArrayList<Topic>): RecyclerView.Adapter<Custo
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val topic: Topic = topicList[p1]
-        Log.i(TAG, topic.name)
+        Log.i(TAG, topic.title)
         Log.i(TAG, p1.toString())
-        p0.cardTopic.text = topic.name
+        p0.cardTopic.text = topic.title
         p0.goToOverviewBtn.setOnClickListener {
             //cardTopic.setText("Clicked on this button")
             val intent = Intent(p0.view.context, TopicOverviewActivity::class.java)
-            intent.putExtra("TopicName", topic.name)
-            intent.putExtra("Description", topic.overviewDesc)
+            intent.putExtra("TopicName", topic.title)
+            intent.putExtra("Description", topic.shortDesc)
             p0.view.context.startActivity(intent)
         }
     }

@@ -21,7 +21,7 @@ class SingleQuestionFragment : Fragment() {
     companion object {
         private val KEY = "question"
 
-        fun newInstance(question: Question): SingleQuestionFragment {
+        fun newInstance(question: Quiz): SingleQuestionFragment {
             val args = Bundle().apply {
                 putSerializable(KEY, question)
             }
@@ -37,7 +37,7 @@ class SingleQuestionFragment : Fragment() {
 
         val question = arguments?.let {
             it.getSerializable(QUESTION_KEY)
-        } as Question
+        } as Quiz
 
         val questionText = rootView.findViewById<TextView>(R.id.questionText) // TextView in single_question.xml
         questionText.text = question.qText
@@ -64,24 +64,6 @@ class SingleQuestionFragment : Fragment() {
                 }
             }
         )
-
-        /*
-        nextBtn.setOnClickListener {
-            currQuestionNum++
-            val checkedId = btnGroup.checkedRadioButtonId
-            val yourAns = findViewById<RadioButton>(checkedId).text
-            if (yourAns == currQuestion.answer) {
-                correct++
-            }
-
-            val intent = Intent(this, AnswerActivity::class.java)
-            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.correct", correct)
-            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.currQuestionNum", currQuestionNum)
-            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.test", test)
-            intent.putExtra("edu.us.ischool.weng2k17.quizdroid.yourAns", yourAns)
-            this.startActivity(intent)
-        }
-        */
 
         nextBtn.setOnClickListener {
             val checkedId = btnGroup.checkedRadioButtonId
