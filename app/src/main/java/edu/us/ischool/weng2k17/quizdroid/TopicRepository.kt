@@ -38,7 +38,7 @@ class TopicRepository() : QuizApp.TopicRepository {
         q4.choices.add("5")
         q4.choices.add("6")
 
-        val mathTest = Topic("Math", "Math is a topic that some find fun but many find NOT fun. If you're on this page, you must be someone who thinks math is fun (weirdo)", "no longDesc", ArrayList<Quiz>())
+        val mathTest = Topic("Math", "Numbers and equations", "Math is a topic that some find fun but many find NOT fun. If you're on this page, you must be someone who thinks math is fun (weirdo)", ArrayList<Quiz>())
         mathTest.quizzes.apply {
             add(q1)
             add(q2)
@@ -71,7 +71,7 @@ class TopicRepository() : QuizApp.TopicRepository {
         q4Physics.choices.add("F=ma")
         q4Physics.choices.add("m=F/a")
 
-        val physicsTest = Topic("Physics", "No one really likes Physics except the people takng this test", "no long desc", ArrayList<Quiz>())
+        val physicsTest = Topic("Physics", "Forces, Kinematics, etc", "No one really likes Physics except the people takng this test", ArrayList<Quiz>())
         physicsTest.quizzes.apply {
             add(q1Physics)
             add(q2Physics)
@@ -104,7 +104,7 @@ class TopicRepository() : QuizApp.TopicRepository {
         q4Marvel.choices.add("Chris Evans")
         q4Marvel.choices.add("Tom Holland")
 
-        val marvelHerosTest = Topic("Marvel Superheros", "Yay! A fun topic about the coolest heros in the MCU", "no long desc", ArrayList<Quiz>())
+        val marvelHerosTest = Topic("Marvel Superheros", "Superhero names and actors", "Yay! A fun topic about the coolest heros in the MCU", ArrayList<Quiz>())
         marvelHerosTest.quizzes.apply {
             add(q1Marvel)
             add(q2Marvel)

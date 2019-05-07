@@ -19,6 +19,10 @@
                 android:id="@+id/cardTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <TextView android:layout_width="match_parent"
+                      android:text="short description"
+                      android:id="@+id/cardShortDesc"
+                      android:layout_height="wrap_content"/>
             <Button android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/overviewButton"
