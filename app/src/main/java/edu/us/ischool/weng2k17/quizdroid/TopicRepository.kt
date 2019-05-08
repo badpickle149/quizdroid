@@ -1,16 +1,26 @@
 package edu.us.ischool.weng2k17.quizdroid
 
+import android.content.Context
+import android.content.res.AssetManager
+import android.util.Log
+import edu.us.ischool.weng2k17.quizdroid.QuizApp.Companion.app
+import org.json.JSONObject
+import java.io.IOException
+
 class TopicRepository() : QuizApp.TopicRepository {
     var topicMap: MutableMap<String, Topic> = mutableMapOf()
+
+    private val TAG = "TopicRepository"
 
     override fun getTopic(topic: String): Topic {
         return topicMap[topic] as Topic
     }
 
     init {
-        initializeData()
+        //initializeData()
     }
 
+    /*
     private fun initializeData() {
         // tests and questions
         // math test
@@ -115,6 +125,52 @@ class TopicRepository() : QuizApp.TopicRepository {
         topicMap[mathTest.title] = mathTest
         topicMap[marvelHerosTest.title] = marvelHerosTest
         topicMap[physicsTest.title] = physicsTest
+
+    }
+    */
+
+    fun readJSON() {
+
+        val jsonString: String? = try {
+
+            val inputStream = assets.open("questions.json")
+//            val inputStream = assets
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+
+            String(buffer, Charsets.UTF_8)
+        } catch (e: IOException) {
+            null
+        }
+
+        Log.i(TAG, jsonString)
+
+        /*
+        jsonString?.let {
+
+            Log.i(TAG, jsonString)
+
+            // Create json from string
+            val jsonObject = JSONObject(jsonString)
+
+            // Get JSON array
+            val employeesJSONArray = jsonObject.getJSONArray(EMPLOYEES_KEY)
+
+            // Read JSON array
+            for (i in 0 until employeesJSONArray.length()) {
+                // get data of array value at index
+                val employeeJSONObject = employeesJSONArray.get(i) as JSONObject
+
+                // Get data value of key
+                val firstName = employeeJSONObject.get(FIRST_NAME)
+                val lastName = employeeJSONObject.get(LAST_NAME)
+
+                Log.i(TAG, "Hello my name is $firstName $lastName")
+            }
+        }
+        */
 
     }
 }
