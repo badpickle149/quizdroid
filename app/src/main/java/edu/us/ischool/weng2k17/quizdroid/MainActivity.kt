@@ -19,10 +19,11 @@ class MainActivity : AppCompatActivity() {
 
         val topics = QuizApp.accessTopicRepo()
         val topicList = ArrayList<Topic>()
+        val mapKeys = topics.keys
         topicList.apply {
-            add(topics["Math"]!!)
-            add(topics["Physics"]!!)
-            add(topics["Marvel Superheros"]!!)
+            for (key in mapKeys) {
+                add(topics[key]!!)
+            }
         }
 
 
