@@ -10,10 +10,12 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import edu.us.ischool.weng2k17.quizdroid.QuizApp.Companion.app
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        QuizApp.newInstance()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -29,7 +31,6 @@ class MainActivity : AppCompatActivity() {
                 add(topics[key]!!)
             }
         }
-
 
         val adapter = CustomAdapter(topicList)
 

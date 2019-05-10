@@ -19,6 +19,10 @@ class QuizApp: Application() {
         fun accessTopicRepo(): MutableMap<String, Topic> {
             return topicMap
         }
+
+        fun newInstance() {
+            app = QuizApp()
+        }
     }
 
     interface TopicRepository {

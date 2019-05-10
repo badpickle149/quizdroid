@@ -5,6 +5,9 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_preferences.*
 
@@ -13,7 +16,10 @@ class PreferencesActivity : AppCompatActivity() {
 
     companion object {
 
-        private const val USER_PREFERENCES_KEY = "USER_PREFERENCES"
+        const val URL_KEY = "url"
+        const val UPDATE_INTERVAL_KEY = "update_interval"
+
+        private const val USER_PREFERENCES_KEY = "USER_PREFERENCES_KEY"
         private const val TIMESTAMP_KEY = "timestamp"
 
 
@@ -29,16 +35,32 @@ class PreferencesActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
 
-    fun readWriteJSON() {
-/*
         sharedPreferences = getSharedPreferences(USER_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
-        sharedPreferences
-            .edit()
-            .put*/
+        val saveURLBtn = findViewById<Button>(R.id.saveURLBtn)
+        saveURLBtn.setOnClickListener {
+            val newURL = findViewById<EditText>(R.id.downloadURL)
 
+            sharedPreferences
+                .edit()
+                .putString(URL_KEY, newURL.text.toString())
+                .apply()
+
+            val toast = Toast.makeText(this, "${sharedPreferences.getString(URL_KEY, "no key found")}", Toast.LENGTH_LONG).show()
+        }
+
+        val updateIntervalBtn = findViewById<Button>(R.id.saveUpdateIntervalBtn)
+        updateIntervalBtn.setOnClickListener {
+            val newUpdateInterval = findViewById<EditText>(R.id.minuteSetting).text.toString().toInt()
+
+            sharedPreferences
+                .edit()
+                .putInt(UPDATE_INTERVAL_KEY, newUpdateInterval)
+                .apply()
+
+            val toast = Toast.makeText(this, "${sharedPreferences.getInt(UPDATE_INTERVAL_KEY, -1)}", Toast.LENGTH_LONG).show()
+        }
     }
 
 }
