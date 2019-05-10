@@ -3,6 +3,7 @@ package edu.us.ischool.weng2k17.quizdroid
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONStringer
@@ -28,6 +29,7 @@ class QuizApp: Application() {
         super.onCreate()
         Log.i(TAG, "QuizApp is being loaded and run!!!")
         readJSON()
+        val json = getJSONFromWeb()
     }
 
     fun readJSON() {
@@ -45,13 +47,13 @@ class QuizApp: Application() {
             null
         }
 
-        Log.i(TAG, jsonString)
+        /*Log.i(TAG, jsonString)*/
         val jsonArray = JSONArray(jsonString)
 
         for (i in 0 until jsonArray.length()) {
             assignTopicData(jsonArray, i)
         }
-        Log.i(TAG, topicMap.toString())
+        /*Log.i(TAG, topicMap.toString())*/
 
     }
 
@@ -72,6 +74,31 @@ class QuizApp: Application() {
             Topic.quizzes.add(quiz)
         }
         topicMap[topicTitle] = Topic
+    }
+
+    // http://students.washington.edu/weng2k17/info448-data/data.json
+    fun getJSONFromWeb(): String {
+        val url = "http://students.washington.edu/weng2k17/info448-data/data.php"
+
+        val request = Request.Builder().url(url).build()
+        var json = ""
+
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object: Callback {
+            override fun onResponse(call: Call, response: Response) {
+                val resBody = response.body()?.string()
+                json = resBody!!
+                Log.i(TAG, resBody)
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e(TAG, e.toString())
+            }
+        })
+
+
+
+        return json
     }
 
 }

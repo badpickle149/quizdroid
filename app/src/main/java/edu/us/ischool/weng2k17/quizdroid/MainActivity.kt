@@ -1,11 +1,13 @@
 package edu.us.ischool.weng2k17.quizdroid
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 
@@ -39,6 +41,17 @@ class MainActivity : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.preferences -> {
+                val intent = Intent(this, PreferencesActivity::class.java)
+                this.startActivity(intent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
