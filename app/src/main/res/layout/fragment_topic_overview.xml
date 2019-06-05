@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:id="@+id/topicOverviewFragment"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".TopicOverviewFragment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_margin="5dp"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/overviewTopicName"
+                  android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                  android:text="Math"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_margin="5dp"
+                  android:id="@+id/overviewDesc"
+                  android:text="This is a very long description of the Math topic which includes a lot of stuff that we don't care about but I must include it here for the sake of design"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_margin="10dp"
+                  android:text="Number of questions:"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_margin="10dp"
+                  android:id="@+id/overviewQuestionNum"
+                  android:text="9"
+                  android:layout_height="wrap_content"/>
+        <Button android:layout_width="wrap_content"
+                android:text="Begin"
+                android:id="@+id/beginButton"
+                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</FrameLayout>

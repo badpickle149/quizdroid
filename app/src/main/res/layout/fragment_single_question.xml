@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".SingleQuestionFrag">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <TextView
+                android:text="What is the equation for acceleration?"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/questionText"/>
+        <RadioGroup android:layout_width="match_parent"
+                    android:id="@+id/btnContainer"
+                    android:layout_height="wrap_content">
+            <RadioButton
+                    android:text="RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/choice1"/>
+            <RadioButton
+                    android:text="RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/choice2"/>
+            <RadioButton
+                    android:text="RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/choice3"/>
+            <RadioButton
+                    android:text="RadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/choice4"/>
+        </RadioGroup>
+        <Button
+                android:text="Submit"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/nextQuestionBtn"/>
+    </LinearLayout>
+
+</FrameLayout>
